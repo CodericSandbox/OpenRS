@@ -1,0 +1,23 @@
+OpenReviewScript ©2011 - Version 1.0rc1
+---------------------------------------
+OpenReviewScript is free, open source software for creating product or service review websites, written in PHP using the CodeIgniter framework (http://codeigniter.com) and released under the GPLv2 license (see the 'LICENSE' file for more details).
+
+Contact us at: help@openreviewscript.org or http://openreviewscript.org/contact
+Support available at: http://openreviewscript.org/support
+
+Server Requirements
+===================
+ - PHP version 5.1.6+
+ - MySQL 4.1+
+ - GD Library
+ - Client URL Library (libcurl)
+(most hosts will have all of the above as standard)
+
+Also required...
+ - An FTP client (or shell access) for uploading the files to your hosting/server
+ - Your favorite web browser for running the installer
+
+Installation
+============
+
+For installation instructions, go to http://openreviewscript.org/install
