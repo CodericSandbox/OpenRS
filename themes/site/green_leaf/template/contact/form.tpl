@@ -38,7 +38,7 @@
 		    </label>
 		</div>
 		<div class="contactright">
-		    <input class="form_input" size="45" type="text" name="email" id="email" value="{{= set_value('email') }}"/>
+		    <input class="form_input" size="40" type="text" name="email" id="email" value="{{= set_value('email') }}"/>
 		    {{= form_error('email') }}
 		</div>
 	    </div>
@@ -48,7 +48,7 @@
 		    </label>
 		</div>
 		<div class="contactright">
-		    <textarea class="form_input" cols="45" rows="10" name="message" id="message">{{= set_value('message') }}</textarea>
+		    <textarea class="form_input" cols="40" rows="10" name="message" id="message">{{= set_value('message') }}</textarea>
 		    {{= form_error('message') }}
 		</div>
 	    </div>
@@ -58,7 +58,7 @@
 		    </label>
 		</div>
 		<div class="contactright">
-		    <input class="form_input" size="45" type="text" name="captcha" id="captcha" value=""/>
+		    <input class="form_input" size="40" type="text" name="captcha" id="captcha" value=""/>
 		    {{= form_error('captcha') }}
 		    <span class="captcha">{{= $captcha_image }}</span>
 		    {{ if ($error_message): }}
