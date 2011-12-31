@@ -109,7 +109,7 @@ class Review_feature extends CI_Controller {
 			    $data['message'] = lang('manager_review_feature_form_fail');
 			    debug('loading "review_feature/add" view');
 			    $sections = array('content' => 'manager/' . $this->setting['current_manager_theme'] . '/template/review_feature/add', 'sidebar' => 'manager/' . $this->setting['current_manager_theme'] . '/template/sidebar');
-			    $this->template->load('site/' . $this->setting['current_theme'] . '/template/manager_template', $sections, $data);
+			    $this->template->load('manager/' . $this->setting['current_manager_theme'] . '/template/manager_template', $sections, $data);
 			} else {
 			    debug('validation successful');
 			    // validation successful
