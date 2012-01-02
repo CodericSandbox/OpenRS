@@ -445,7 +445,7 @@ $path_to_config_file = '../application/config/database.php';
 			    $headers = 'From: install@openreviewscript.org' . "\r\n" .
 				    'Reply-To: install@openreviewscript.org' . "\r\n" .
 				    'X-Mailer: PHP/' . phpversion();
-			    if (mail('install@openreviewscript.org', 'Test', 'Test', $headers)) {
+			    if (mail('null@localhost', 'Test', 'Test', $headers)) {
 				echo '<b>The mail server seems to be responding correctly ' . $image_start . 'tick' . $image_end . '</b><br /><br />';
 				echo '(Note: this is just a simple email function test - you might need to check your mail settings if you have any problems with your site sending emails)<br /><br />';
 			    } else {
