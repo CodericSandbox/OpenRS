@@ -62,7 +62,7 @@
                               </label>
                         </div>
                         <div class="formright">
-                              <input class="strong" type="text" name="text" id="text" value="{{= set_value('text', $ad->text) }}"/>
+                              <textarea cols="40" rows="8" name="text" class="strong" id="text">{{= set_value('text', $ad->text) }}</textarea>
                               {{= form_error('text') }}
                         </div>
                   </div>

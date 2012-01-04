@@ -58,7 +58,7 @@
     {{ endif }}
     {{ if ($ad->text!=''): }}
     <p class="sidebar_ad">
-	{{= character_limiter($ad->text, 100) }}
+	{{= character_limiter($ad->text) }}
     </p>
     {{ endif }}
     {{ endif }}
