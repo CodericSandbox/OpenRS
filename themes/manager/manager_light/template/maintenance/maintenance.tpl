@@ -98,5 +98,17 @@
 		    </div>
 		</div>
 	    </form>
+            <form id="form" class="myform" onSubmit="return confirm('{{= lang('manager_maintenance_confirm') }}')" name="form" method="post" enctype="multipart/form-data" action="{{= base_url() . 'manager/maintenance' }}">
+		<div class="formblock">
+		    <div class="formleftwide">
+			<label>{{= lang('manager_maintenance_update_db') }}
+			    <span class="small">{{= lang('manager_maintenance_update_db_info') }}</span>
+			</label>
+		    </div>
+		    <div class="formright">
+			<input type="submit" name="db_update_submit" id="button" value="{{= lang('manager_maintenance_update_db_button') }}" />
+		    </div>
+		</div>
+	    </form>	    
 	</div>
     </div>

@@ -129,6 +129,23 @@ class Maintenance extends CI_Controller {
 	    $data['message'] = lang('manager_maintenance_repaired');
 	    debug('database repaired and optimized');
 	}
+	if ($this->input->post('db_update_submit')) {
+	    debug('check and update database options was submitted');
+	    $this->load->database();
+	    $query = $this->db->query("SHOW COLUMNS FROM `ad` WHERE field = 'text'");
+	    if ($query->num_rows() == 1)
+	    {
+	       $row = $query->row();
+	       if (strtolower($row->Type) == 'text') {
+		    $data['message'] = lang('manager_maintenance_db_not_updated');
+		    debug('no need to update database');
+	       } else {
+		    $data['message'] = lang('manager_maintenance_db_updated');
+		    $query = $this->db->query("ALTER TABLE `ad` CHANGE `text` `text` TEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL");
+		    debug('database has been updated');
+	       }
+	    } 
+	}
 	debug('loading "manager/maintenance/maintenance" view');
 	$sections = array('content' => 'manager/' . $this->setting['current_manager_theme'] . '/template/maintenance/maintenance', 'sidebar' => 'manager/' . $this->setting['current_manager_theme'] . '/template/sidebar');
 	$this->template->load('manager/' . $this->setting['current_manager_theme'] . '/template/manager_template', $sections, $data);
