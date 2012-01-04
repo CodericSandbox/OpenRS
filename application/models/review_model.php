@@ -246,7 +246,6 @@ class Review_model extends CI_Model {
 	// return the tag cloud
 	$this->db->select('tag,COUNT(*) AS tagcount');
 	$this->db->group_by('tag');
-	$this->db->limit($this->config->item('tag_cloud_count'));
 	$query = $this->db->get('tags');
 	if ($query->num_rows() > 0) {
 	    $tag_array = array();

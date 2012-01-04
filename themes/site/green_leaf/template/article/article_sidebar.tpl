@@ -20,7 +20,7 @@
 }}
 <!-- START OF SIDEBAR SECTION -->
 <div id="sidebar">
-    
+
     <!-- START OF CONDITIONAL 'SEARCH' SECTION -->
     {{ if ($show_search): }}
     <div id="search" >
@@ -32,7 +32,21 @@
 	    </div>
     {{ endif }}
     <!-- END OF 'SEARCH' SECTION -->
-    
+
+    <!-- START OF CONDITIONAL 'CATEGORIES' SECTION -->
+    {{ if($show_categories): }}
+    <div id="menu_header">
+	<p>{{= lang('sidebar_categories') }}</p>
+    </div>
+    <ul>
+	{{ foreach ($categories as $index=>$category): }}
+	<li><p>{{= anchor('results/category/'.$category->seo_name, $category->name) }}</p></li>
+	{{ if ($index+1 != count($categories)): }}<div class="menu_separator"></div>{{ endif }}
+	{{ endforeach }}
+    </ul>
+    {{ endif }}
+    <!-- END OF 'CATEGORIES' SECTION -->
+
     <!-- START OF CONDITIONAL 'RECENT REVIEWS' SECTION -->
     {{ if(($show_recent)&&($recent)): }}
     <div id="menu_header">

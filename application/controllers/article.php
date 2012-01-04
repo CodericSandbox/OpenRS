@@ -52,6 +52,7 @@ class Article extends CI_Controller {
 	$this->load->model('Article_model');
 	$this->load->model('Ad_model');
 	$this->load->model('Review_model');
+	$this->load->model('Category_model');
 	// load all settings into an array
 	$this->setting = $this->Setting_model->getEverySetting();
     }
@@ -81,9 +82,23 @@ class Article extends CI_Controller {
 	} else {
 	    $data['recent'] = FALSE;
 	}
+	$data['categories'] = $this->Category_model->getAllCategories(0);
+	$data['show_categories'] = $this->setting['categories_sidebar'];
 	if ($data['article']) {
 	    debug('found article with title "' . $requested_article_title . '"');
 	    // article exists
+	    if ($this->setting['tag_cloud_sidebar'] > 0) {
+		//Prepare Tag Cloud
+		$tagcloud = $this->Review_model->getTagCloudArray();
+		if ($tagcloud !== FALSE) {
+		    $data['tagcloud'] = $tagcloud;
+		    foreach ($data['tagcloud'] as $key => $value) {
+			$tagcount[$key] = $value[0];
+		    }
+		    $data['cloudmax'] = max($tagcount);
+		    $data['cloudmin'] = min($tagcount);
+		}
+	    }
 	    // set page_title, meta_keywords and meta_description
 	    $data['page_title'] = $this->setting['site_name'] . ' - ' . lang('article_page_title_article') . ' - ' . $data['article']->title;
 	    if (trim($data['article']->meta_keywords) !== '') {
