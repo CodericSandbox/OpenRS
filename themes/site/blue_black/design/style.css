@@ -735,3 +735,48 @@ h2.heading {
     color:#ff0000;
     font-weight: bold;
 }
+.login_error {
+      color:#a00000;
+      font-weight:bold;
+}
+.loginform input {
+      border: 1px solid #808080;
+      height:45px;
+      padding: 4px;
+      width:300px;
+      font-size:30px;
+      background:#f0f0f0;
+      color: #6d4115;
+      font-family: "Lucida Grande","Lucida Sans Unicode","Palatino","Verdana";
+}
+div.loginleft {
+    width: 180px;
+    margin-left: 20px;
+    padding-top: 10px;
+    float: left;
+    font-size:30px;
+    text-align: right;
+}
+div.loginright {
+    margin-left:210px;
+    padding:2px;
+}
+#login_button {
+    font-size: 16px;
+    font-family: "Lucida Grande","Lucida Sans Unicode","Palatino","Verdana";    
+}
+div.loginforgot {
+    font-size:12px;
+    width:300px;
+    text-align: right;  
+}
+.userpass {
+      border: 1px solid #a0a0a0;
+      height:35px;
+      padding: 4px;
+      width:316px;
+      font-size:16px;
+      background:#FFFFFF;
+      color: #154d6d;
+      font-family: "Lucida Grande","Lucida Sans Unicode","Palatino","Verdana";
+}

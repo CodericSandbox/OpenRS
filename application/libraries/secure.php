@@ -48,6 +48,13 @@ class Secure {
 	    return false;
 	}
     }
+    function isLoggedIn($session) {
+	if (($session->userdata('logged_in'))) {
+	    return true;
+	} else {
+	    return false;
+	}
+    }
 
 }
 
