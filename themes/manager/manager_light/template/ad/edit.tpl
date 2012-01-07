@@ -57,7 +57,7 @@
                               </label>
                         </div>
                         <div class="formright">
-                              <input class="strong" type="text" name="text" id="text" value="{{= set_value('text', $ad->text) }}"/>
+                              <textarea cols="40" rows="8" name="text" class="strong" id="text">{{= set_value('text', $ad->text) }}</textarea>
                               {{= form_error('text') }}
                         </div>
                   </div>
@@ -155,7 +155,7 @@
                         <div class="ad_image">{{= anchor($ad->link, $ad->image) }}</div>
                   {{ endif }}
                   {{ if ($ad->text !== ''): }}
-                        <div class="ad_text">{{= character_limiter($ad->text, 100) }}</div>
+                        <div class="ad_text">{{= character_limiter($ad->text) }}</div>
                   {{ endif }}
             </div>
       </div>

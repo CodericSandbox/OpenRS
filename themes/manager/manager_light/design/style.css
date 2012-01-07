@@ -74,7 +74,7 @@ a:hover {
 }
 div.formblock {
       display: block;
-      overflow: auto;
+      overflow: hidden;
       margin: 20px 0px 20px 0px;
 }
 div.formleft {

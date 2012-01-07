@@ -75,7 +75,7 @@
 	    {{ endif }}
 	    {{ if ($ad->text != ''): }}
 	    <div class="ad_text">
-		{{= character_limiter($ad->text, 100) }}
+		{{= character_limiter($ad->text) }}
 	    </div>
 	    {{ endif }}
 	</div>

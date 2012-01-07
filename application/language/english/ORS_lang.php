@@ -661,6 +661,11 @@ $lang['manager_maintenance_cache_deleted'] = 'Cache files have been deleted';
 $lang['manager_maintenance_repair'] = 'Repair and Optimize Database';
 $lang['manager_maintenance_repair_info'] = 'Repairs and then Optimizes all tables in the database';
 $lang['manager_maintenance_repair_button'] = 'Repair and Optimize';
+$lang['manager_maintenance_update_db'] = 'Check Database Structure Is Up To Date' ;
+$lang['manager_maintenance_update_db_info'] = 'Checks table structure is correct for current version and make alterations if necessary';
+$lang['manager_maintenance_update_db_button'] = 'Check and Update';
+$lang['manager_maintenance_db_updated'] = 'Database was out of date and has been updated';
+$lang['manager_maintenance_db_not_updated'] = 'Database is already up to date';
 $lang['manager_maintenance_repaired'] = 'All tables have been repaired and optimized';
 $lang['manager_maintenance_confirm'] = 'Are you sure you want to do this?';
 

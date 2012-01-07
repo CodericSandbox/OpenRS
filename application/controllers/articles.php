@@ -52,6 +52,7 @@ class Articles extends CI_Controller {
 	$this->load->model('Article_model');
 	$this->load->model('Ad_model');
 	$this->load->model('Review_model');
+	$this->load->model('Category_model');
 	// load all settings into an array
 	$this->setting = $this->Setting_model->getEverySetting();
     }
@@ -84,10 +85,24 @@ class Articles extends CI_Controller {
 	} else {
 	    $data['recent'] = FALSE;
 	}
+	$data['categories'] = $this->Category_model->getAllCategories(0);
+	$data['show_categories'] = $this->setting['categories_sidebar'];
 	$data['allarticles'] = $this->Article_model->getAllArticles($this->setting['perpage_site_articles'], $this->uri->segment(3));
 	if ($data['allarticles']) {
 	    debug('loaded list of articles');
 	    // got list of articles
+	    if ($this->setting['tag_cloud_sidebar'] > 0) {
+		//Prepare Tag Cloud
+		$tagcloud = $this->Review_model->getTagCloudArray();
+		if ($tagcloud !== FALSE) {
+		    $data['tagcloud'] = $tagcloud;
+		    foreach ($data['tagcloud'] as $key => $value) {
+			$tagcount[$key] = $value[0];
+		    }
+		    $data['cloudmax'] = max($tagcount);
+		    $data['cloudmin'] = min($tagcount);
+		}
+	    }
 	    // set up config for pagination
 	    $config['base_url'] = base_url() . 'articles/index';
 	    $config['next_link'] = lang('results_next');
