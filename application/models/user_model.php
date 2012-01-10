@@ -124,8 +124,8 @@ class User_model extends CI_Model {
      * managerEmailExists function
      */
 
-    function managerEmailExists($email, $id = 0) {
-	// check if manager email address exists in users table... to prevent duplicates
+    function userEmailExists($email, $id = 0) {
+	// check if user email address exists in users table... to prevent duplicates
 	$this->db->where('email', $email);
 	// ignore a user id... this is optional and is used when you want to ignore the current user when editing
 	if ($id > 0) {

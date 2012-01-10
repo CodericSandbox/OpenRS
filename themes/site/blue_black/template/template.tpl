@@ -70,6 +70,10 @@
 		    </ul>
 		</div>
 		<!-- END OF 'NAVBAR' SECTION -->
+		    {{ if ($this->secure->isLoggedIn($this->session)): }}
+		    <div class="login">{{= lang('site_logged_in_as').' ('.$this->session->userdata('name').') | '.anchor('/logout',lang('site_log_out')) }}</div>
+		    {{ else: }}
+<div class="login">{{= lang('site_not_logged_in') .' | '.anchor('/login',lang('site_log_in')).' | '.anchor('/register',lang('site_register')) }}</div>		    {{ endif }}
 
 		<!-- START OF 'HEADER' SECTION -->
 		<div id="header" style="background: url({{= site_logo() }}) no-repeat 30px center;">

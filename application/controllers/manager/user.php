@@ -116,7 +116,7 @@ class User extends CI_Controller {
 		$user_exists = $this->User_model->getUserByName(trim($this->input->post('name')));
 		if (!$user_exists) {
 		    // check email does not exist
-		    $email_exists = $this->User_model->managerEmailExists($this->input->post('email'));
+		    $email_exists = $this->User_model->userEmailExists($this->input->post('email'));
 		    if (!$email_exists) {
 			// prepare data for adding to database
 			$name = $this->input->post('name');
@@ -212,7 +212,7 @@ class User extends CI_Controller {
 		$user_exists = $this->User_model->getUserByName(trim($this->input->post('name')), $id);
 		if (!$user_exists) {
 		    // check email does not exist... again providing a user id to ignore this user's current email address
-		    $email_exists = $this->User_model->managerEmailExists($this->input->post('email'), $id);
+		    $email_exists = $this->User_model->userEmailExists($this->input->post('email'), $id);
 		    if (!$email_exists) {
 			// prepare data for adding to database
 			$name = $this->input->post('name');

@@ -58,12 +58,12 @@ class Logout extends CI_Controller {
      */
 
     function index() {
-	debug('manager/logout page | index function');
+	debug('/logout page | index function');
 	// Log out and redirect to log in page
 	debug('log user out');
 	$this->simplelogin->logout();
-	debug('redirect to "manager/login"');
-	redirect('/manager/login');
+	debug('redirect to "/home"');
+	redirect('/home');
     }
 
 }

@@ -33,36 +33,35 @@
     
     
     <div id="content">
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
 	{{ if($message!=''): }}
-	<p>&nbsp;</p>
 	<h3 class="login_error">{{= $message }}</h3>
 	<p>&nbsp;</p>
 	{{ endif }}
-	<form class="loginform" action="{{= site_url('/login/') }}" method="post">
+	<form class="loginform" action="{{= site_url('/register/') }}" method="post">
             <div class="formblock">
 		<div class="loginleft">
-		    <label>{{= lang('site_login_username') }}</label>
+		    <label>{{= lang('site_register_email') }}</label>
 		</div>
 		<div class="loginright">
-		    <input class="userpass" type="text" name="login_username" id="login_username" value="{{= set_value('login_username') }}">
-		    {{= form_error('login_username') }}
+		    <input class="userpass" type="text" name="register_email" id="register_email" value="{{= set_value('register_email') }}">
+		    {{= form_error('register_email') }}
 		</div>
 		<div class="loginleft">
-		    <label>{{= lang('site_login_password') }}</label>
+		    <label>{{= lang('site_register_username') }}</label>
 		</div>
 		<div class="loginright">
-		    <input class="userpass" type="password" name="login_password" id="login_password" value="">
-		    {{= form_error('login_password') }}
+		    <input class="userpass" type="text" name="register_username" id="register_username" value="{{= set_value('register_username') }}">
+		    {{= form_error('register_username') }}
+		</div>
+		<div class="loginleft">
+		    <label>{{= lang('site_register_password') }}</label>
 		</div>
 		<div class="loginright">
-		    <div class="loginforgot">
-		        <label>{{= anchor('/forgot_login',lang('site_login_forgot')) }}</label>
-		    </div>
+		    <input class="userpass" type="password" name="register_password" id="register_password" value="">
+		    {{= form_error('register_password') }}
 		</div>
 		<div class="loginright">
-	            <input type="submit" name="login_submit" id="login_button" value="{{= lang('site_login_submit') }}" >
+	            <input type="submit" name="register_submit" id="login_button" value="{{= lang('site_register_submit') }}" >
 		</div>
             </div>
 	</form>
