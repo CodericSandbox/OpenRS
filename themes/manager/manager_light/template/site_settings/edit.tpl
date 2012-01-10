@@ -385,6 +385,16 @@
             </div>
             <div class="formblock">
                 <div class="formleft">
+                    <label>{{= lang('manager_site_settings_form_members_activation') }}
+                        <span class="small">{{= lang('manager_site_settings_form_members_activation_info') }}</span>
+                    </label>
+                </div>
+                <div class="formright">
+                    <input name="members_activation" id="members_activation" type="checkbox" {{= $members_activation }}>
+                </div>
+            </div>
+            <div class="formblock">
+                <div class="formleft">
                     <label>
                         <b>{{= lang('manager_site_settings_form_perpage_title') }}</b>
                     </label>

@@ -100,6 +100,7 @@ class Site_settings extends CI_Controller {
 	$data['review_auto'] = $this->setting['review_auto'] > 0 ? 'CHECKED' : '';
 	$data['comment_approval'] = $this->setting['comment_approval'] > 0 ? 'CHECKED' : '';
 	$data['comment_auto'] = $this->setting['comment_auto'] > 0 ? 'CHECKED' : '';
+	$data['members_activation'] = $this->setting['members_activation'] > 0 ? 'CHECKED' : '';
 	$data['perpage_site_home'] = $this->setting['perpage_site_home'];
 	$data['perpage_site_search'] = $this->setting['perpage_site_search'];
 	$data['perpage_site_category'] = $this->setting['perpage_site_category'];
@@ -320,6 +321,7 @@ class Site_settings extends CI_Controller {
 		$this->Setting_model->updateSetting('review_auto', isset($_POST['review_auto']) ? 1 : 0);
 		$this->Setting_model->updateSetting('comment_approval', isset($_POST['comment_approval']) ? 1 : 0);
 		$this->Setting_model->updateSetting('comment_auto', isset($_POST['comment_auto']) ? 1 : 0);
+		$this->Setting_model->updateSetting('members_activation', isset($_POST['members_activation']) ? 1 : 0);		
 		$this->Setting_model->updateSetting('perpage_site_home', $this->input->post('perpage_site_home'));
 		$this->Setting_model->updateSetting('perpage_site_search', $this->input->post('perpage_site_search'));
 		$this->Setting_model->updateSetting('perpage_site_category', $this->input->post('perpage_site_category'));
@@ -370,6 +372,7 @@ class Site_settings extends CI_Controller {
 		$data['review_auto'] = $this->setting['review_auto'] > 0 ? 'CHECKED' : '';
 		$data['comment_approval'] = $this->setting['comment_approval'] > 0 ? 'CHECKED' : '';
 		$data['comment_auto'] = $this->setting['comment_auto'] > 0 ? 'CHECKED' : '';
+		$data['members_activation'] = $this->setting['members_activation'] > 0 ? 'CHECKED' : '';
 		$data['perpage_site_home'] = $this->setting['perpage_site_home'];
 		$data['perpage_site_search'] = $this->setting['perpage_site_search'];
 		$data['perpage_site_category'] = $this->setting['perpage_site_category'];
