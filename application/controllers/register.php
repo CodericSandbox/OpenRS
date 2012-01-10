@@ -55,6 +55,7 @@ class Register extends CI_Controller {
 	$this->load->model('Ad_model');
 	$this->load->model('Category_model');
 	$this->load->model('User_model');
+	$this->load->library('email');
 	// load all settings into an array
 	$this->setting = $this->Setting_model->getEverySetting();
     }
@@ -151,13 +152,56 @@ class Register extends CI_Controller {
 			    $password = $this->input->post('register_password');
 			    $email = $this->input->post('register_email');
 			    $level = 1;
-			    // add the user
-			    $new_user_id = $this->User_model->addUser($name, $password, $email, $level);
-			    $data['message'] = lang('site_user_add_success');
-			    // display the form
-			    debug('loading "register" view');
-			    $sections = array('content' => 'site/' . $this->setting['current_theme'] . '/template/register/register', 'sidebar' => 'site/' . $this->setting['current_theme'] . '/template/register/register_sidebar');
-			    $this->template->load('site/' . $this->setting['current_theme'] . '/template/template', $sections, $data);
+			    // check if new users require activation
+			    if ($this->setting['members_activation']=='1') {
+				// add the user as inactive
+				$new_user_id = $this->User_model->addUser($name, $password, $email, $level, 0);
+				// store a temporary key in the user record
+				$temporary_key = $this->User_model->storeTemporaryKey($new_user_id);
+				// create the email message
+				$user = $this->User_model->getUserById($user_id);
+				$email_message = lang('site_register_email_message_1a') . $this->setting['site_name'] . "\n\n";
+				$email_message .= lang('site_register_email_message_1b') . $user->name . "\n\n";
+				$email_message .= lang('site_register_email_message_1c') . "\n\n";
+				$email_message .= lang('site_register_email_message_1d') . "\n\n";
+				// include a link with the key so we can identify the user when they confirm their registration
+				$email_message .= base_url() . 'activate/' . urlencode($temporary_key);
+				$this->email->from($this->setting['site_email']);
+				$this->email->to($this->input->post('register_email'));
+				$this->email->subject(lang('site_register_activate_subject') . $this->setting['site_name']);
+				$this->email->message($email_message);
+				print_r($email_message);
+				echo "<br>";
+				echo "email from ".$this->setting['site_email'],"<br>";
+				echo "email to ".$this->input->post('register_email')."<br>";
+				echo "email subject ".lang('site_register_activate_subject') . $this->setting['site_name']."<br>";
+				die();
+				// send the email
+				debug('send the email to the user');
+				if ($this->email->send()) {
+				    // email sent... display the 'login sent' page
+				    $data['message'] = lang('site_user_add_success');
+				    // display the form
+				    debug('loading "register" view');
+				    $sections = array('content' => 'site/' . $this->setting['current_theme'] . '/template/register/register', 'sidebar' => 'site/' . $this->setting['current_theme'] . '/template/register/register_sidebar');
+				    $this->template->load('site/' . $this->setting['current_theme'] . '/template/template', $sections, $data);
+				} else {
+				    debug('email not sent - show error');
+				    show_error(lang('error_sending_email'));
+				    exit;
+				}
+			    }
+			    else
+			    {
+				// add the user as active
+				$new_user_id = $this->User_model->addUser($name, $password, $email, $level, 1);
+				$data['message'] = lang('site_user_add_success');
+				// display the form
+				debug('loading "register" view');
+				$sections = array('content' => 'site/' . $this->setting['current_theme'] . '/template/register/register', 'sidebar' => 'site/' . $this->setting['current_theme'] . '/template/register/register_sidebar');
+				$this->template->load('site/' . $this->setting['current_theme'] . '/template/template', $sections, $data);
+				
+			    }
 			} else {
 			    // email address already exists - reload page and display error
 			    $data['message'] = lang('site_user_form_email_exists');

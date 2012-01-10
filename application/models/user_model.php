@@ -55,14 +55,15 @@ class User_model extends CI_Model {
      * addUser function
      */
 
-    function addUser($name, $password, $email, $level) {
+    function addUser($name, $password, $email, $level, $active=0) {
 	// add the user
 	$password = do_hash($password, 'md5');
 	$data = array(
 	    'name' => $name,
 	    'password' => $password,
 	    'email' => $email,
-	    'level' => $level
+	    'level' => $level,
+	    'active' => $active
 	);
 	$this->db->insert('user', $data);
     }
