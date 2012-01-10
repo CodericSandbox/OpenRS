@@ -130,21 +130,31 @@ class Maintenance extends CI_Controller {
 	    debug('database repaired and optimized');
 	}
 	if ($this->input->post('db_update_submit')) {
+	    $updated = 0;
 	    debug('check and update database options was submitted');
 	    $this->load->database();
 	    $query = $this->db->query("SHOW COLUMNS FROM `ad` WHERE field = 'text'");
-	    if ($query->num_rows() == 1)
-	    {
+	    if ($query->num_rows() == 1) {
 	       $row = $query->row();
-	       if (strtolower($row->Type) == 'text') {
-		    $data['message'] = lang('manager_maintenance_db_not_updated');
-		    debug('no need to update database');
-	       } else {
-		    $data['message'] = lang('manager_maintenance_db_updated');
+	       if (strtolower($row->Type) != 'text') {
 		    $query = $this->db->query("ALTER TABLE `ad` CHANGE `text` `text` TEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL");
-		    debug('database has been updated');
+		    $updated = 1;
+		    debug('changed column type for text in ad table');
 	       }
-	    } 
+	    }
+	    $query = $this->db->query("SHOW COLUMNS FROM `user` WHERE field = 'active'");
+	    if ($query->num_rows() == 0) {
+		$query = $this->db->query("ALTER TABLE `user` ADD `active` TINYINT( 1 ) NOT NULL DEFAULT '0'");
+		$updated = 1;
+		debug('added column active in user table');
+	    }
+	    if ($updated == 1) {
+		$data['message'] = lang('manager_maintenance_db_updated');
+		
+	    } else {
+		$data['message'] = lang('manager_maintenance_db_not_updated');
+		debug('no need to update database');		
+	    }
 	}
 	debug('loading "manager/maintenance/maintenance" view');
 	$sections = array('content' => 'manager/' . $this->setting['current_manager_theme'] . '/template/maintenance/maintenance', 'sidebar' => 'manager/' . $this->setting['current_manager_theme'] . '/template/sidebar');
