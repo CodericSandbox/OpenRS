@@ -44,10 +44,10 @@
 class Activate extends CI_Controller {
 
     /*
-     * Forgot_login controller class constructor
+     * Activate controller class constructor
      */
 
-    function Reset_password() {
+    function Activate() {
 	parent::__construct();
 	$this->load->model('User_model');
 	$this->load->library('email');
@@ -84,8 +84,8 @@ class Activate extends CI_Controller {
 			// email sent... display the 'activated' page
 			$data[] = '';
 			debug('loading "activated" view');
-			$sections = array('content' => 'site/' . $this->setting['current_site_theme'] . '/template/activate/activated');
-			$this->template->load('site/' . $this->setting['current_site_theme'] . '/template/site_template', $sections, $data);
+			$sections = array('content' => 'site/' . $this->setting['current_theme'] . '/template/activate/activated');
+			$this->template->load('site/' . $this->setting['current_theme'] . '/template/site_template', $sections, $data);
 		    } else {
 			debug('error sending email (server error)');
 			show_error(lang('error_sending_email'));
