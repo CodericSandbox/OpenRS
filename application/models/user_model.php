@@ -66,6 +66,7 @@ class User_model extends CI_Model {
 	    'active' => $active
 	);
 	$this->db->insert('user', $data);
+	return $this->db->insert_id();
     }
 
     /*
@@ -167,6 +168,30 @@ class User_model extends CI_Model {
 	// key not found
 	return FALSE;
     }
+    
+    /*
+     * activateAccount function
+     */
+
+    function activateAccount($key) {
+	// check the provided key and activate the user's account
+	$this->db->where('key', $key);
+	$this->db->limit(1);
+	$query = $this->db->get('user');
+	if ($query->num_rows() > 0) {
+	    // found the user
+	    $user_id = $query->row()->id;
+	    $data['key'] = '';
+	    $data['active'] = '1';
+	    $this->db->where('id', $user_id);
+	    // update the user
+	    $this->db->update('user', $data);
+	    return TRUE;
+	}
+	// key not found
+	return FALSE;
+    }
+    
 
     /*
      * storeTemporaryKey function

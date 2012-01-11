@@ -861,3 +861,6 @@ $lang['site_register_email_message_1b'] = 'The user name you registered is ';
 $lang['site_register_email_message_1c'] = 'If you did not register at our site and someone else has used your email address, please ignore this and any further emails';
 $lang['site_register_email_message_1d'] = 'All you need to do to activate your membership is to visit the link below...';
 $lang['site_register_activate_subject'] = 'Registration of Member Account at ';
+$lang['site_register_activated_message_2a'] = 'Thank you for activating your account';
+$lang['site_register_activated_message_2b'] = 'You can log in here: ';
+$lang['site_register_activated_subject'] = 'Account activated at ';

@@ -159,7 +159,7 @@ class Register extends CI_Controller {
 				// store a temporary key in the user record
 				$temporary_key = $this->User_model->storeTemporaryKey($new_user_id);
 				// create the email message
-				$user = $this->User_model->getUserById($user_id);
+				$user = $this->User_model->getUserById($new_user_id);
 				$email_message = lang('site_register_email_message_1a') . $this->setting['site_name'] . "\n\n";
 				$email_message .= lang('site_register_email_message_1b') . $user->name . "\n\n";
 				$email_message .= lang('site_register_email_message_1c') . "\n\n";
@@ -170,12 +170,6 @@ class Register extends CI_Controller {
 				$this->email->to($this->input->post('register_email'));
 				$this->email->subject(lang('site_register_activate_subject') . $this->setting['site_name']);
 				$this->email->message($email_message);
-				print_r($email_message);
-				echo "<br>";
-				echo "email from ".$this->setting['site_email'],"<br>";
-				echo "email to ".$this->input->post('register_email')."<br>";
-				echo "email subject ".lang('site_register_activate_subject') . $this->setting['site_name']."<br>";
-				die();
 				// send the email
 				debug('send the email to the user');
 				if ($this->email->send()) {
