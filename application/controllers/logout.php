@@ -6,7 +6,7 @@
  * An Open Source Review Site Script
  *
  * @package		OpenReviewScript
- * @subpackage          manager
+ * @subpackage          site
  * @author		OpenReviewScript.org
  * @copyright           Copyright (c) 2011, OpenReviewScript.org
  * @license		This file is part of OpenReviewScript - free software licensed under the GNU General Public License version 2 - http://OpenReviewScript.org/license
@@ -36,7 +36,7 @@
  * Logs the user out
  *
  * @package		OpenReviewScript
- * @subpackage          manager
+ * @subpackage          site
  * @category            controller
  * @author		OpenReviewScript.org
  * @link		http://OpenReviewScript.org
@@ -69,4 +69,4 @@ class Logout extends CI_Controller {
 }
 
 /* End of file logout.php */
-/* Location: ./application/controllers/manager/logout.php */
+/* Location: ./application/controllers/logout.php */

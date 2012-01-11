@@ -5,7 +5,7 @@
  * An Open Source Review Site Script
  *
  * @package		OpenReviewScript
- * @subpackage          manager
+ * @subpackage          site
  * @author		OpenReviewScript.org
  * @copyright           Copyright (c) 2011, OpenReviewScript.org
  * @license		This file is part of OpenReviewScript - free software licensed under the GNU General Public License version 2 - http://OpenReviewScript.org/license
@@ -38,12 +38,11 @@
 	    <h3 class="login_error">{{= $message }}</h3>
 	    <p>&nbsp;</p>
 	{{ endif }}
-	    <form class="loginform" action="{{= site_url('/manager/forgot_login') }}" method="post">
+	    <form class="loginform" action="{{= site_url('/forgot_login') }}" method="post">
 	    <div class="formblock">
 		<div class="loginleft">
 		    <label>
-			{{= lang('manager_login_forgot_email') }}
-			<span class="small">{{= lang('manager_login_forgot_email_info') }}</span>
+			{{= lang('site_login_forgot_email') }}
 		    </label>
 		</div>
 		<div class="loginright">
@@ -51,6 +50,8 @@
 		    {{= form_error('login_email') }}
 		</div>
 	    </div>
-	    <input type="submit" name="login_forgot_submit" id="button" value="{{= lang('manager_login_forgot_submit') }}" />
-	</form>
+	    <div class="loginright">
+		<input type="submit" name="login_forgot_submit" id="button" value="{{= lang('site_login_forgot_submit') }}" />
+	    </div>
+	    </form>
 </div>

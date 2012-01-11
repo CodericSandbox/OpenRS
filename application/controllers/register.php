@@ -100,8 +100,6 @@ class Register extends CI_Controller {
 		    $data['cloudmin'] = min($tagcount);
 		}
 	    }
-
-
 	    // check form was submitted
 	    if ($this->input->post('register_submit')) {
 		debug('form was submitted');
@@ -111,17 +109,17 @@ class Register extends CI_Controller {
 		$config = array(
 		    array(
 			'field' => 'register_username',
-			'label' => lang('manager_user_form_validation_name'),
+			'label' => lang('site_user_form_validation_name'),
 			'rules' => 'trim|alpha_numeric|required|min_length[4]|max_length[15]|xss_clean'
 		    ),
 		    array(
 			'field' => 'register_password',
-			'label' => lang('manager_user_form_validation_password'),
+			'label' => lang('site_user_form_validation_password'),
 			'rules' => 'alpha_numeric|required|min_length[6]|max_length[15]|xss_clean'
 		    ),
 		    array(
 			'field' => 'register_email',
-			'label' => lang('manager_user_form_validation_email'),
+			'label' => lang('site_user_form_validation_email'),
 			'rules' => 'trim|required|valid_email|min_length[5]|max_length[255]|xss_clean'
 		    )
 		);
@@ -138,9 +136,6 @@ class Register extends CI_Controller {
 		    // validation successful
 		    debug('validation successful - registering user');
 		    // register the user
-
-
-
 		    // check username does not exist
 		    $user_exists = $this->User_model->getUserByName(trim($this->input->post('register_username')));
 		    if (!$user_exists) {
@@ -174,7 +169,7 @@ class Register extends CI_Controller {
 				debug('send the email to the user');
 				if ($this->email->send()) {
 				    // email sent... display the 'login sent' page
-				    $data['message'] = lang('site_user_add_success');
+				    $data['message'] = lang('site_user_add_activate');
 				    // display the form
 				    debug('loading "register" view');
 				    $sections = array('content' => 'site/' . $this->setting['current_theme'] . '/template/register/register', 'sidebar' => 'site/' . $this->setting['current_theme'] . '/template/register/register_sidebar');
@@ -189,11 +184,31 @@ class Register extends CI_Controller {
 			    {
 				// add the user as active
 				$new_user_id = $this->User_model->addUser($name, $password, $email, $level, 1);
-				$data['message'] = lang('site_user_add_success');
-				// display the form
-				debug('loading "register" view');
-				$sections = array('content' => 'site/' . $this->setting['current_theme'] . '/template/register/register', 'sidebar' => 'site/' . $this->setting['current_theme'] . '/template/register/register_sidebar');
-				$this->template->load('site/' . $this->setting['current_theme'] . '/template/template', $sections, $data);
+
+
+                                // create the email message
+                                $user = $this->User_model->getUserById($new_user_id);
+                                $email_message = lang('site_registered_email_message_1a') . $this->setting['site_name'] . "\n\n";
+                                $email_message .= lang('site_registered_email_message_1b') . $user->name . "\n\n";
+                                $email_message .= lang('site_registered_email_message_1c') .  . ' ' . base_url() . 'login' . "\n\n";
+                                $this->email->from($this->setting['site_email']);
+                                $this->email->to($this->input->post('register_email'));
+                                $this->email->subject(lang('site_registered_subject') . $this->setting['site_name']);
+                                $this->email->message($email_message);
+                                // send the email
+                                debug('send the email to the user');
+                                if ($this->email->send()) {
+                                    // email sent... display the 'login sent' page
+                                    $data['message'] = lang('site_user_add_success') . base_url() . 'login';
+                                    // display the form
+                                    debug('loading "register" view');
+                                    $sections = array('content' => 'site/' . $this->setting['current_theme'] . '/template/register/register', 'sidebar' => 'site/' . $this->setting['current_theme'] . '/template/register/regis$
+                                    $this->template->load('site/' . $this->setting['current_theme'] . '/template/template', $sections, $data);
+                                } else {
+                                    debug('email not sent - show error');
+                                    show_error(lang('error_sending_email'));
+                                    exit;
+                                }
 				
 			    }
 			} else {

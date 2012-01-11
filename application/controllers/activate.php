@@ -6,7 +6,7 @@
  * An Open Source Review Site Script
  *
  * @package		OpenReviewScript
- * @subpackage          manager
+ * @subpackage          site
  * @author		OpenReviewScript.org
  * @copyright           Copyright (c) 2011, OpenReviewScript.org
  * @license		This file is part of OpenReviewScript - free software licensed under the GNU General Public License version 2 - http://OpenReviewScript.org/license
@@ -36,7 +36,7 @@
  * Activates a user's account when they click the link in their activation email
  *
  * @package		OpenReviewScript
- * @subpackage          manager
+ * @subpackage          site
  * @category            controller
  * @author		OpenReviewScript.org
  * @link		http://OpenReviewScript.org
@@ -67,7 +67,7 @@ class Activate extends CI_Controller {
      */
 
     function do_activation($key) {
-       debug('activate page | index function');
+        debug('activate page | index function');
         // load data for view
         $data['page_title'] = $this->setting['site_name'] . ' - ' . lang('site_register_activated_title');
         $data['sidebar_ads'] = $this->Ad_model->getAds($this->setting['max_ads_home_sidebar'], 3);
@@ -109,7 +109,7 @@ class Activate extends CI_Controller {
                     $email_message .= lang('site_register_activated_message_2b') . ' ' . base_url() . 'login';
                     $this->email->from($this->setting['site_email']);
                     $this->email->to($user_email);
-                    $this->email->subject(lang('site_register_activated_subject') . $this->setting['site_name$
+                    $this->email->subject(lang('site_register_activated_subject') . $this->setting['site_name']);
                     $this->email->message($email_message);
                     debug('sending email message to user');
                     if ($this->email->send()) {	
