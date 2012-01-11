@@ -865,3 +865,4 @@ $lang['site_register_activated_message_2a'] = 'Thank you for activating your acc
 $lang['site_register_activated_message_2b'] = 'You can log in here: ';
 $lang['site_register_activated_subject'] = 'Account activated at ';
 $lang['site_register_account_activated'] = 'Thank you your acccount has been activated, you can log in here: ';
+$lang['site_register_activated_title'] = 'Account Successfully Activated';

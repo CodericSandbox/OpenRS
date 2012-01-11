@@ -67,52 +67,52 @@ class Activate extends CI_Controller {
      */
 
     function do_activation($key) {
-	debug('activate page | index function');
-	// load data for view
-	$data['page_title'] = $this->setting['site_name'] . ' - ' . lang('site_register_activated_title');
-	$data['sidebar_ads'] = $this->Ad_model->getAds($this->setting['max_ads_home_sidebar'], 3);
-	$data['show_recent'] = $this->setting['recent_review_sidebar'];
-	$data['show_search'] = $this->setting['search_sidebar'];
-	$data['categories'] = $this->Category_model->getAllCategories(0);
-	$data['show_categories'] = $this->setting['categories_sidebar'];
-	$data['captcha_verification'] = $this->setting['captcha_verification'];
-	$data['keywords'] = '';
-	$approval_required = $this->setting['review_approval'];
-	if ($data['show_recent'] == 1) {
-	    $data['recent'] = $this->Review_model->getLatestReviews($this->setting['number_of_reviews_sidebar'], 0, $approval_required);
-	} else {
-	    $data['recent'] = FALSE;
-	}
-	if ($this->setting['tag_cloud_sidebar'] > 0) {
-	    //Prepare Tag Cloud
-	    $tagcloud = $this->Review_model->getTagCloudArray();
-	    if ($tagcloud !== FALSE) {
-		$data['tagcloud'] = $tagcloud;
-		foreach ($data['tagcloud'] as $key => $value) {
-		    $tagcount[$key] = $value[0];
-		}
-		$data['cloudmax'] = max($tagcount);
-		$data['cloudmin'] = min($tagcount);
-	    }
-	}
-	// check key was provided
-	if ($key !== '') {
-	    // use key to find the user's email address
-	    $user_email = $this->User_model->getEmailFromKey($key);
-	    if ($user_email) {
-		debug('found user\'s email address using key');
-		debug('activating user\'s account');
-		$activated = $this->User_model->activateAccount($key);
-		if ($activated === TRUE) {{}
-		    // send email to the user with the new password
-		    $email_message = lang('site_register_activated_message_2a') . "\n\n";
-		    $email_message .= lang('site_register_activated_message_2b') . ' ' . base_url() . 'login';
-		    $this->email->from($this->setting['site_email']);
-		    $this->email->to($user_email);
-		    $this->email->subject(lang('site_register_activated_subject') . $this->setting['site_name']);
-		    $this->email->message($email_message);
-		    debug('sending email message to user');
-		    if ($this->email->send()) {
+       debug('activate page | index function');
+        // load data for view
+        $data['page_title'] = $this->setting['site_name'] . ' - ' . lang('site_register_activated_title');
+        $data['sidebar_ads'] = $this->Ad_model->getAds($this->setting['max_ads_home_sidebar'], 3);
+        $data['show_recent'] = $this->setting['recent_review_sidebar'];
+        $data['show_search'] = $this->setting['search_sidebar'];
+        $data['categories'] = $this->Category_model->getAllCategories(0);
+        $data['show_categories'] = $this->setting['categories_sidebar'];
+        $data['captcha_verification'] = $this->setting['captcha_verification'];
+        $data['keywords'] = '';
+        $approval_required = $this->setting['review_approval'];
+        if ($data['show_recent'] == 1) {
+            $data['recent'] = $this->Review_model->getLatestReviews($this->setting['number_of_reviews_sidebar'], 0, $approval_required);
+        } else {
+            $data['recent'] = FALSE;
+        }
+        if ($this->setting['tag_cloud_sidebar'] > 0) {
+            //Prepare Tag Cloud
+            $tagcloud = $this->Review_model->getTagCloudArray();
+            if ($tagcloud !== FALSE) {
+                $data['tagcloud'] = $tagcloud;
+                foreach ($data['tagcloud'] as $tagkey => $value) {
+                    $tagcount[$tagkey] = $value[0];
+                }
+                $data['cloudmax'] = max($tagcount);
+                $data['cloudmin'] = min($tagcount);
+            }
+        }
+        // check key was provided
+        if ($key !== '') {
+            // use key to find the user's email address
+            $user_email = $this->User_model->getEmailFromKey($key);
+            if ($user_email) {
+                debug('found user\'s email address using key');
+                debug('activating user\'s account');
+                $activated = $this->User_model->activateAccount($key);
+                if ($activated === TRUE) {{}
+                    // send email to the user with the new password
+                    $email_message = lang('site_register_activated_message_2a') . "\n\n";
+                    $email_message .= lang('site_register_activated_message_2b') . ' ' . base_url() . 'login';
+                    $this->email->from($this->setting['site_email']);
+                    $this->email->to($user_email);
+                    $this->email->subject(lang('site_register_activated_subject') . $this->setting['site_name$
+                    $this->email->message($email_message);
+                    debug('sending email message to user');
+                    if ($this->email->send()) {	
 			// email sent... display the 'activated' page
 			$data[] = '';
 			debug('loading "activated" view');
