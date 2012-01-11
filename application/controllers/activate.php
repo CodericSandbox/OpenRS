@@ -84,7 +84,7 @@ class Activate extends CI_Controller {
 			// email sent... display the 'activated' page
 			$data[] = '';
 			debug('loading "activated" view');
-			$sections = array('content' => 'site/' . $this->setting['current_theme'] . '/template/activate/activated');
+			$sections = array('content' => 'site/' . $this->setting['current_theme'] . '/template/activate/activated', 'sidebar' => 'site/' . $this->setting['current_theme'] . '/template/home/home_sidebar');
 			$this->template->load('site/' . $this->setting['current_theme'] . '/template/template', $sections, $data);
 		    } else {
 			debug('error sending email (server error)');
