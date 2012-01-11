@@ -5,7 +5,7 @@
  * An Open Source Review Site Script
  *
  * @package		OpenReviewScript
- * @subpackage          manager
+ * @subpackage          site
  * @author		OpenReviewScript.org
  * @copyright           Copyright (c) 2011, OpenReviewScript.org
  * @license		This file is part of OpenReviewScript - free software licensed under the GNU General Public License version 2 - http://OpenReviewScript.org/license
@@ -32,6 +32,6 @@
  }}
 <div id="content">
     <div class="header_row">
-	{{= lang('manager_login_forgot_login_sent') }}
+	{{= lang('site_login_forgot_login_sent') }}
     </div  >
 </div>
