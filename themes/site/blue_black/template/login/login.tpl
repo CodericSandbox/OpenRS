@@ -33,10 +33,7 @@
     
     
     <div id="content">
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
 	{{ if($message!=''): }}
-	<p>&nbsp;</p>
 	<h3 class="login_error">{{= $message }}</h3>
 	<p>&nbsp;</p>
 	{{ endif }}

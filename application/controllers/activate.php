@@ -41,7 +41,7 @@
  * @author		OpenReviewScript.org
  * @link		http://OpenReviewScript.org
  */
-class Reset_password extends CI_Controller {
+class Activate extends CI_Controller {
 
     /*
      * Forgot_login controller class constructor
@@ -61,7 +61,7 @@ class Reset_password extends CI_Controller {
      * check the provided key, reset the password and send an email to the user
      */
 
-    function index($key) {
+    function do_activation($key) {
 	debug('activate page | index function');
 	// check key was provided
 	if ($key !== '') {
@@ -77,14 +77,14 @@ class Reset_password extends CI_Controller {
 		    $email_message .= lang('site_register_activated_message_2b') . ' ' . base_url() . 'login';
 		    $this->email->from($this->setting['site_email']);
 		    $this->email->to($user_email);
-		    $this->email->subject(lang('site_register_activated_subject'));
+		    $this->email->subject(lang('site_register_activated_subject') . $this->setting['site_name']);
 		    $this->email->message($email_message);
 		    debug('sending email message to user');
 		    if ($this->email->send()) {
 			// email sent... display the 'activated' page
 			$data[] = '';
 			debug('loading "activated" view');
-			$sections = array('content' => 'site/' . $this->setting['current_site_theme'] . '/template/activated');
+			$sections = array('content' => 'site/' . $this->setting['current_site_theme'] . '/template/activate/activated');
 			$this->template->load('site/' . $this->setting['current_site_theme'] . '/template/site_template', $sections, $data);
 		    } else {
 			debug('error sending email (server error)');

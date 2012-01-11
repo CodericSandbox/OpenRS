@@ -165,7 +165,7 @@ class Register extends CI_Controller {
 				$email_message .= lang('site_register_email_message_1c') . "\n\n";
 				$email_message .= lang('site_register_email_message_1d') . "\n\n";
 				// include a link with the key so we can identify the user when they confirm their registration
-				$email_message .= base_url() . 'activate/' . urlencode($temporary_key);
+				$email_message .= base_url() . 'activate/do_activation/' . urlencode($temporary_key);
 				$this->email->from($this->setting['site_email']);
 				$this->email->to($this->input->post('register_email'));
 				$this->email->subject(lang('site_register_activate_subject') . $this->setting['site_name']);
