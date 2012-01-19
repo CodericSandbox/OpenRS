@@ -34,5 +34,5 @@
     <div class="header_row">
 	{{= lang('site_login_forgot_password_is_reset') }}
     </div  >
-    <p>{{= anchor('home', lang('site_login_forgot_login_link')) }}</p>
+    <p>{{= anchor('login', lang('site_login_forgot_login_link')) }}</p>
 </div>
