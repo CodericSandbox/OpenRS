@@ -24,7 +24,6 @@
 	<meta name="keywords" content="{{=  $meta_keywords }}" />
 	<meta name="description" content="{{=  $meta_description }}" />
 	<title>{{=  $page_title }}</title>
-	<link href="{{=  template_path() }}design/style.css" rel="stylesheet" type="text/css"/>
 	<link rel="alternate" type="application/rss+xml" title="Latest Reviews (RSS2.0)" href="{{=  base_url() . 'rss' }}" />
 	<script language="JavaScript" type="text/javascript">
 	    <!--
@@ -80,8 +79,8 @@
 		</div>
 		<!-- END OF 'HEADER' SECTION -->
 
-		{{=  $sidebar }}
-		{{=  $content }}
+		{{=  $column_1 }}
+		{{=  $column_2 }}
 	    </div>
 	    <!-- END OF 'CONTAINER' SECTION -->
 	    
