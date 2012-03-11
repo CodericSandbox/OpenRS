@@ -98,6 +98,7 @@
 	    <div class="more_button_link">
 		{{= anchor('review/show/' . $latest_result->seo_title, lang('lists_read_more'),'class="more_button"') }}
 	    </div>
+	    	<img src="{{= template_path() . 'design/images/' . $latest_result->rating_image }}" alt=""/>
 	</div>
     </div>
     <!-- END OF 'REVIEW ITEM' SECTION -->
