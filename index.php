@@ -1,4 +1,5 @@
 <?php
+  header("Content-Type: text/html; charset=UTF-8");
 /*
  * An Open Source Review Site Script
  * This file is based on the original CodeIgniter index.php file
@@ -46,7 +47,7 @@ if (defined('ENVIRONMENT'))
 	
 		case 'testing':
 		case 'production':
-			error_reporting(E_ERROR);
+			error_reporting(E_ALL);
 		break;
 
 		default:
