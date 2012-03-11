@@ -120,8 +120,7 @@ class Comments extends CI_Controller {
 	// check user is logged in with manager level permissions
 	$this->secure->allowManagers($this->session);
 	// load a page of pending comments into an array for displaying in the view
-	$data['pendingcomments'] = $this->Comment_model->getCommentsPending($this->setting['perpage_manager_comments_pending'], $this->uri->segment(4));
-        echo "page number you want is ".$this->uri->segment(4);;
+	$data['pendingcomments'] = $this->Comment_model->getCommentsPending($this->setting['perpage_manager_comments_pending'], $this->uri->segment(5));
 	if ($data['pendingcomments']) {
 	    debug('loaded pending comments');
 // set up config data for pagination
@@ -131,7 +130,7 @@ class Comments extends CI_Controller {
 	    $total = $this->Comment_model->countCommentsPending();
 	    $config['total_rows'] = $total;
 	    $config['per_page'] = $this->setting['perpage_manager_comments_pending'];
-	    $config['uri_segment'] = 4;
+	    $config['uri_segment'] = 5;
 	    $this->pagination->initialize($config);
 	    $data['pagination'] = $this->pagination->create_links();
 	    if (trim($data['pagination'] === '')) {
