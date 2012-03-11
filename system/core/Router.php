@@ -159,7 +159,6 @@ class CI_Router {
 		{
 			return $this->_set_default_controller();
 		}
-
 		// Do we need to remove the URL suffix?
 		$this->uri->_remove_url_suffix();
 

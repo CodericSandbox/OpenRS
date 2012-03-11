@@ -105,7 +105,7 @@ class Forgot_login extends CI_Controller {
 			$email_message .= lang('manager_login_forgot_email_message_1d') . "\n\n";
 			// include a link with the key so we can identify the user when they confirm the password reset request
 			$email_message .= base_url() . 'manager/reset_password/do_reset/' . urlencode($temporary_key);
-			$this->email->from($this->setting['site_email'], $this->setting['site_name']);
+			$this->email->from($this->setting['site_email']);
 			$this->email->to($this->input->post('login_email'));
 			$this->email->subject(lang('manager_login_forgot_password_reset_subject') . $this->setting['site_name']);
 			$this->email->message($email_message);

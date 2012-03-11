@@ -34,7 +34,7 @@
     <html>
 	<head>
             <title>{{= lang('manager_page_title') }} - {{= $this->config->item('site_name') }}</title>
-            <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+            <meta http-equiv="content-type" content="text/html; charset=UTF-8">
             <link rel="stylesheet" type="text/css" href="{{= manager_template_path() }}design/style.css">
 	    <script type="text/javascript" src="{{=  base_url() }}libs/tiny_mce/tiny_mce.js" ></script >
 	    <script type="text/javascript" >

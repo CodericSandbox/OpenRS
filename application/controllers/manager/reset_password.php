@@ -77,7 +77,7 @@ class Reset_password extends CI_Controller {
 		    $email_message = lang('manager_login_forgot_email_message_2a') . "\n\n";
 		    $email_message .= $newPassword . "\n\n";
 		    $email_message .= lang('manager_login_forgot_email_message_2b') . ' ' . base_url() . 'manager/login';
-		    $this->email->from($this->setting['site_email'], $this->setting['site_name']);
+		    $this->email->from($this->setting['site_email']);
 		    $this->email->to($user_email);
 		    $this->email->subject(lang('manager_login_forgot_new_password_subject'));
 		    $this->email->message($email_message);

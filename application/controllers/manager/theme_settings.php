@@ -190,9 +190,11 @@ class Theme_settings extends CI_Controller {
 		    debug('uploading the file');
 		    // attempt to upload the file
 		    if (!$this->upload->do_upload()) {
+			$file_data = array('upload_data' => $this->upload->data());
+			$mimetype= $file_data['upload_data']['file_type'];
 			// if there was an error uploading, set the error message
 			debug('there was a file uploading error... ' . $this->upload->display_errors());
-			$data['upload_error'] = lang('manager_theme_settings_form_upload_error') . $this->upload->display_errors();
+			$data['upload_error'] = lang('manager_theme_settings_form_upload_error') . $this->upload->display_errors().' Your file type is <font color="#0000FF">'.$mimetype."</font>";
 			$file_error = 1;
 		    } else {
 			// upload successful

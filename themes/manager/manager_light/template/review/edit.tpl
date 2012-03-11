@@ -49,7 +49,7 @@
             <p class="manager_right_link"><strong>-> {{= anchor('manager/review_features/show/'.$review->id, lang('manager_review_manage_features')) }}</strong></p>
             <p>&nbsp;</p>
             <p>&nbsp;</p>
-            <form id="form" class="myform" name="form" method="post" enctype="multipart/form-data" action="{{= base_url() . 'manager/review/edit/' . $review->id }}">
+            <form id="form" accept-charset="UTF-8" class="myform" name="form" method="post" enctype="multipart/form-data" lang="ru" action="{{= base_url() . 'manager/review/edit/' . $review->id }}">
                   <div class="formblock">
                         <div class="formleft">
                               <label>{{= lang('manager_review_form_title') }}
