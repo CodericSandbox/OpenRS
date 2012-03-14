@@ -6,7 +6,7 @@
 		        $CI =& get_instance();
 		        $CI->load->helper('text');
 		        $str = utf8_decode($str);
-		        $str = preg_replace_callback('/(.)/', 'convert_accented_characters', $str);            
+		        $str = @preg_replace_callback('/(.)/', 'convert_accented_characters', $str);            
 		}
 		
 		if ($separator == 'dash')

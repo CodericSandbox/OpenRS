@@ -198,7 +198,7 @@ class Contact extends CI_Controller {
 	} else {
 	    // form not submitted so just show the page
 	    debug('form not submitted');
-	    $data[] = '';
+	    $data['error_message'] = '';
 	    debug('loading "contact/form" view');
 	    $sections = array('content' => 'site/' . $this->setting['current_theme'] . '/template/contact/form', 'sidebar' => 'site/' . $this->setting['current_theme'] . '/template/page/page_sidebar');
 	    $this->template->load('site/' . $this->setting['current_theme'] . '/template/template.tpl', $sections, $data);
