@@ -7,7 +7,7 @@
 * @package		OpenReviewScript
 * @subpackage          manager
 * @author		OpenReviewScript.org
-* @copyright           Copyright (c) 2011, OpenReviewScript.org
+* @copyright           Copyright (c) 2011-2012, OpenReviewScript.org
 * @license		This file is part of OpenReviewScript - free software licensed under the GNU General Public License version 2 - http://OpenReviewScript.org/license
 * @link		http://OpenReviewScript.org
 */
@@ -69,7 +69,7 @@
 		    {{= $content }}
                 </div>
 		<div id="footer">
-		    <p>Copyright &copy;2011<a class="footerlink" href="http://openreviewscript.org">OpenReviewScript</a></p>
+		    <p>Copyright &copy;2011-2012<a class="footerlink" href="http://openreviewscript.org">OpenReviewScript</a></p>
 		</div>
             </div>
 	</body>

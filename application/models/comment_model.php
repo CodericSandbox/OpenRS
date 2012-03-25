@@ -8,7 +8,7 @@
  * @package		OpenReviewScript
  * @subpackage          site
  * @author		OpenReviewScript.org
- * @copyright           Copyright (c) 2011, OpenReviewScript.org
+ * @copyright           Copyright (c) 2011-2012, OpenReviewScript.org
  * @license		OpenReviewScript is free software licensed under the GNU General Public License version 2 - This file is part of OpenReviewScript - free software licensed under the GNU General Public License version 2 - http://OpenReviewScript.org/license
  * @link		http://OpenReviewScript.org
  */

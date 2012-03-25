@@ -1,7 +1,7 @@
 {{
 /**
  *    This file is part of OpenReviewScript - free review software licensed under the GNU General Public License version 2 - http://OpenReviewScript.org/license
- *    Copyright (c) 2011, OpenReviewScript.org
+ *    Copyright (c) 2011-2012, OpenReviewScript.org
  *    http://OpenReviewScript.org
  *
  *    OpenReviewScript is free software: you can redistribute it and/or modify
