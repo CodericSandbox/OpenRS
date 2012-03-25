@@ -76,9 +76,11 @@ class Home extends CI_Controller {
 	$data['featured_minimum'] = $this->setting['featured_minimum'];
 	$data['featured_reviews'] = $this->setting['featured_section_home'] == 1 ? count($data['featured']) : 0;
 	$data['latest'] = $this->Review_model->getLatestReviews($this->setting['perpage_site_home'], $this->uri->segment(3));
-	foreach ($data['latest'] as $key => $review) {
-	    $data['latest'][$key]->rating_image = $this->Comment_model->GetVisitorRatingForReviewById($data['latest'][$key]->id);
-	}
+        if ($data['latest']) {
+            foreach ($data['latest'] as $key => $review) {
+                $data['latest'][$key]->rating_image = $this->Comment_model->GetVisitorRatingForReviewById($data['latest'][$key]->id);
+            }
+        }
 	$data['categories'] = $this->Category_model->getAllCategories(0);
 	$data['show_categories'] = $this->setting['categories_sidebar'];
 	$data['show_search'] = $this->setting['search_sidebar'];
