@@ -1,14 +1,6 @@
 <?php
 	function url_title($str, $separator = 'dash', $lowercase = FALSE)
-	{
-		if (UTF8_ENABLED)
-	{
-		        $CI =& get_instance();
-		        $CI->load->helper('text');
-		        $str = utf8_decode($str);
-		        $str = @preg_replace_callback('/(.)/', 'convert_accented_characters', $str);            
-		}
-		
+	{		
 		if ($separator == 'dash')
 		{
 			$search		= '_';
@@ -29,7 +21,6 @@
 		        '^[-_]+|[-_]+$'                => '',
 		        '\.+$'                        => ''
 		);  
-
 		$str = strip_tags($str);
 		foreach ($trans as $key => $val)
 		{
