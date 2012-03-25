@@ -30,7 +30,7 @@
  */
 ?>
 <?php
-error_reporting(E_NONE);
+error_reporting(0);
 $image_start = '<img src="images/';
 $image_end = '.png">';
 $gd_fail = FALSE;
