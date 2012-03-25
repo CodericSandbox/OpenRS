@@ -127,7 +127,7 @@ class User extends CI_Controller {
 			$new_user_id = $this->User_model->addUser($name, $password, $email, $level);
 			$data['message'] = lang('manager_user_add_success');
 			// clear form validation data
-			$this->form_validation->_field_data = array();
+			$this->form_validation->clear_fields();
 			// display the form
 			debug('loading "manager/user/add" view');
 			$sections = array('content' => 'manager/' . $this->setting['current_manager_theme'] . '/template/user/add', 'sidebar' => 'manager/' . $this->setting['current_manager_theme'] . '/template/sidebar');

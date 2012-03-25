@@ -99,7 +99,7 @@ class Feature extends CI_Controller {
 		$this->Feature_model->addFeature($name);
 		$data['message'] = lang('manager_feature_add_success');
 		// clear form validation data
-		$this->form_validation->_field_data = array();
+		$this->form_validation->clear_fields();
 		// reload the form
 		debug('loading "manager/feature/add" view');
 		$sections = array('content' => 'manager/' . $this->setting['current_manager_theme'] . '/template/feature/add', 'sidebar' => 'manager/' . $this->setting['current_manager_theme'] . '/template/sidebar');

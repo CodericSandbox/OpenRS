@@ -301,7 +301,7 @@ class Review extends CI_Controller {
 			}
 		    }
 		    $data['message'] = lang('manager_review_add_success');
-		    $this->form_validation->_field_data = array();
+		    $this->form_validation->clear_fields();
 		    debug('loading "manager/review/add" view');
 		    $sections = array('content' => 'manager/' . $this->setting['current_manager_theme'] . '/template/review/add', 'sidebar' => 'manager/' . $this->setting['current_manager_theme'] . '/template/sidebar');
 		    $this->template->load('manager/' . $this->setting['current_manager_theme'] . '/template/manager_template', $sections, $data);

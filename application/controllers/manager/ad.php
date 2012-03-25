@@ -230,7 +230,7 @@ class Ad extends CI_Controller {
 		    $this->Ad_model->addAd($name, $orig_file_name, $remote_image_url, $height, $width, $text, $link, $visible_in_sidebar, $visible_in_lists, $visible_on_review_page);
 		    $data['message'] = lang('manager_ad_add_success');
 		    // clear form validation data
-		    $this->form_validation->field_data = array();
+		    $this->form_validation->clear_fields();
 		    // reload the form
 		    debug('loading "manager/ad/add" view');
 		    $sections = array('content' => 'manager/' . $this->setting['current_manager_theme'] . '/template/ad/add', 'sidebar' => 'manager/' . $this->setting['current_manager_theme'] . '/template/sidebar');

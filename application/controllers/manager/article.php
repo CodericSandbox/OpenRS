@@ -135,7 +135,7 @@ class Article extends CI_Controller {
 		// message displayed when page reloads
 		$data['message'] = lang('manager_article_add_success');
 		// clear form validation data
-		$this->form_validation->_field_data = array();
+		$this->form_validation->clear_fields();
 		// display the form
 		debug('loading "manager/article/add" view');
 		$sections = array('content' => 'manager/' . $this->setting['current_manager_theme'] . '/template/article/add', 'sidebar' => 'manager/' . $this->setting['current_manager_theme'] . '/template/sidebar');

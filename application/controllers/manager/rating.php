@@ -100,7 +100,7 @@ class Rating extends CI_Controller {
 		$this->Rating_model->addRating($name);
 		$data['message'] = lang('manager_rating_add_success');
 		// clear form validation data
-		$this->form_validation->_field_data = array();
+		$this->form_validation->clear_fields();
 		// reload the form
 		debug('loading "manager/rating/add" view');
 		$sections = array('content' => 'manager/' . $this->setting['current_manager_theme'] . '/template/rating/add', 'sidebar' => 'manager/' . $this->setting['current_manager_theme'] . '/template/sidebar');

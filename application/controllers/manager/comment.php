@@ -113,7 +113,7 @@ class Comment extends CI_Controller {
 			$data['review'] = $review;
 			$data['message'] = lang('manager_comment_add_success');
 			// clear form validation data
-			$this->form_validation->_field_data = array();
+			$this->form_validation->clear_fields();
 			// display the form
 			debug('loading "manager/comment/add" view');
 			$sections = array('content' => 'manager/' . $this->setting['current_manager_theme'] . '/template/comment/add', 'sidebar' => 'manager/' . $this->setting['current_manager_theme'] . '/template/sidebar');
