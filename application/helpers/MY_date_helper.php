@@ -122,3 +122,5 @@ function timespan($seconds = 1, $time = '') {
     }
     return substr(trim($str), 0, -1);
 }
+/* End of file MY_date_helper.php */
+/* Location: ./application/helpers/MY_date_helper.php */
