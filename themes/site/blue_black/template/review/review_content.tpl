@@ -114,7 +114,7 @@
 	    <div class="review_click_image">{{= lang('review_larger_image') }}</div>
 	    {{ else: }}
 	    {{= anchor('recommends/this/' . $review->seo_title, ' ', 'rel="nofollow" class="image" style="background: url('.$review->review_thumb_url.') no-repeat center center"') }}
-	    </dOOv>
+	    </div>
 	    {{ endif }}
 	    {{ if ($features_count > 0): }}
 	    <div class="review_features">
