@@ -511,6 +511,8 @@ div#extra{
 .manager_right_link {
       float:right;
       text-decoration:underlink;
+      width:600px;
+      text-align:right;
 }
 .manager_right_link a:hover {
       color:#f8b878;

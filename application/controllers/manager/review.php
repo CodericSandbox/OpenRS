@@ -180,8 +180,10 @@ class Review extends CI_Controller {
 		    $config['max_height'] = $this->setting['max_upload_height'];
 		    $config['remove_spaces'] = TRUE;
 		    // store the file name and extension
-		    $file_name = str_replace(' ', '_', pathinfo($_FILES['userfile']['name'], PATHINFO_FILENAME));
-		    $extension = $ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
+		    $extension = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
+		    $file_name = str_replace(' ', '_', $_FILES['userfile']['name']);
+		    $file_name = substr($file_name,0,strlen($file_name)-strlen($extension)-1);
+		    $file_name = str_replace('.', '_', $_FILES['userfile']['name']);
 		    // create a random number to append to the file name
 		    $random_number = rand(0, 99999999);
 		    $config['file_name'] = $file_name . '_' . $random_number . '.' . $extension;
@@ -241,7 +243,7 @@ class Review extends CI_Controller {
 		    if (!$this->image_lib->resize()) {
 			// resize failed... delete the file and set error message
 			debug('resize failed - deleting original file - upload failed');
-			unlink('./uploads/images/' . $uploaded_file_name . '.' . $uploaded_file_extension);
+			@unlink('./uploads/images/' . $uploaded_file_name . '.' . $uploaded_file_extension);
 			$data['grab_error'] = lang('manager_review_form_remote_image_fail');
 			$file_error = 1;
 		    } else {
@@ -262,7 +264,8 @@ class Review extends CI_Controller {
 			if (!$this->image_lib->resize()) {
 			    // resize failed... delete the file and set error message
 			    debug('resize failed - deleting original file - upload failed');
-			    unlink('./uploads/images/' . $uploaded_file_name . '.' . $uploaded_file_extension);
+			    @unlink('./uploads/images/' . $uploaded_file_name . '.' . $uploaded_file_extension);
+                            echo $this->image_lib->display_errors();
 			    $data['grab_error'] = lang('manager_review_form_remote_image_fail');
 			    $file_error = 1;
 			}
@@ -338,6 +341,7 @@ class Review extends CI_Controller {
 	$data['upload_error'] = '';
 	$data['grab_error'] = '';
 	// check form data was submitted
+        $data['review'] = $this->Review_model->getReviewById($id);
 	if ($this->input->post('review_submit')) {
 	    // set up form validation config
 	    debug('form was submitted');
@@ -396,7 +400,6 @@ class Review extends CI_Controller {
 	    if ($this->form_validation->run() === FALSE) {
 		debug('form validation failed');
 		// validation failed - reload page with error message(s)
-		$data['review'] = $this->Review_model->getReviewById($id);
 		$data['selected_category'] = $data['review']->category_id;
 		$data['featured'] = isset($_POST['featured']) ? 1 : 0;
 		debug('loading "review/edit" view');
@@ -418,13 +421,15 @@ class Review extends CI_Controller {
 		    // set up config for upload library
 		    $config['upload_path'] = './uploads/images';
 		    $config['allowed_types'] = 'gif|jpg|png';
-		    $config['max_size'] = '100000';
-		    $config['max_width'] = '1024';
-		    $config['max_height'] = '768';
+		    $config['max_size'] = $this->setting['max_upload_filesize'];
+		    $config['max_width'] = $this->setting['max_upload_width'];
+		    $config['max_height'] = $this->setting['max_upload_height'];
 		    $config['remove_spaces'] = TRUE;
 		    // store the file name and extension
-		    $file_name = str_replace(' ', '_', pathinfo($_FILES['userfile']['name'], PATHINFO_FILENAME));
-		    $extension = $ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
+		    $extension = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
+		    $file_name = str_replace(' ', '_', $_FILES['userfile']['name']);
+		    $file_name = substr($file_name,0,strlen($file_name)-strlen($extension)-1);
+		    $file_name = str_replace('.', '_', $_FILES['userfile']['name']);
 		    // create a random number to append to the file name
 		    $random_number = rand(0, 99999999);
 		    $config['file_name'] = $file_name . '_' . $random_number . '.' . $extension;
@@ -484,7 +489,8 @@ class Review extends CI_Controller {
 		    if (!$this->image_lib->resize()) {
 			// resize failed... delete the file and set error message
 			debug('resize failed - deleting original file - upload failed');
-			unlink('./uploads/images/' . $uploaded_file_name . '.' . $uploaded_file_extension);
+			@unlink('./uploads/images/' . $uploaded_file_name . '.' . $uploaded_file_extension);
+                        echo $this->image_lib->display_errors();
 			$data['grab_error'] = lang('manager_review_form_remote_image_fail');
 			$file_error = 1;
 		    } else {
@@ -505,7 +511,7 @@ class Review extends CI_Controller {
 			if (!$this->image_lib->resize()) {
 			    // resize failed... delete the file and set error message
 			    debug('resize failed - deleting original file - upload failed');
-			    unlink('./uploads/images/' . $uploaded_file_name . '.' . $uploaded_file_extension);
+			    @unlink('./uploads/images/' . $uploaded_file_name . '.' . $uploaded_file_extension);
 			    $data['grab_error'] = lang('manager_review_form_remote_image_fail');
 			    $file_error = 1;
 			}
@@ -532,13 +538,13 @@ class Review extends CI_Controller {
 			$image_path = './uploads/images/' . $data['review']->image_name . '.' . $data['review']->image_extension;
 			debug('delete review image and thumb nail images');
 			if (file_exists($review_thumb_path)) {
-			    unlink($review_thumb_path);
+			    @unlink($review_thumb_path);
 			}
 			if (file_exists($search_thumb_path)) {
-			    unlink($search_thumb_path);
+			    @unlink($search_thumb_path);
 			}
 			if (file_exists($image_path)) {
-			    unlink($image_path);
+			    @unlink($image_path);
 			}
 		    }
 
@@ -563,7 +569,7 @@ class Review extends CI_Controller {
 		    $data['categories'] = $this->Category_model->getCategoriesDropDown();
 		    $data['upload_error'] = '';
 		    $data['grab_error'] = '';
-		    $data['current_image'] = base_url() . 'uploads/images/' . $data['review']->image_name . '_thumb.' . $data['review']->image_extension;
+		    $data['current_image'] = base_url() . 'uploads/images/' . $data['review']->image_name . '_list_thumb.' . $data['review']->image_extension;
 		    $data['selected_category'] = $data['review']->category_id;
 		    $data['review']->image_url = '';
 		    $data['featured'] = $data['review']->featured > 0 ? 'CHECKED' : '';
@@ -573,7 +579,7 @@ class Review extends CI_Controller {
 		    $this->template->load('manager/' . $this->setting['current_manager_theme'] . '/template/manager_template', $sections, $data);
 		} else {
 		    // error uploading so reload the form
-		    $data['current_image'] = base_url() . 'uploads/images/' . $data['review']->image_name . '_thumb.' . $data['review']->image_extension;
+		    $data['current_image'] = base_url() . 'uploads/images/' . $data['review']->image_name . '_list_thumb.' . $data['review']->image_extension;
 		    $data['selected_category'] = $data['review']->category_id;
 		    $data['review']->image_url = '';
 		    $data['featured'] = $data['review']->featured > 0 ? 'CHECKED' : '';
@@ -590,7 +596,7 @@ class Review extends CI_Controller {
 	    if ($data['review']) {
 		$data['selected_category'] = $data['review']->category_id;
 		$data['review']->image_url = '';
-		$data['current_image'] = base_url() . 'uploads/images/' . $data['review']->image_name . '_thumb.' . $data['review']->image_extension;
+		$data['current_image'] = base_url() . 'uploads/images/' . $data['review']->image_name . '_list_thumb.' . $data['review']->image_extension;
 		$data['featured'] = $data['review']->featured > 0 ? 'CHECKED' : '';
 		debug('loading "manager/review/edit" view');
 		$sections = array('content' => 'manager/' . $this->setting['current_manager_theme'] . '/template/review/edit', 'sidebar' => 'manager/' . $this->setting['current_manager_theme'] . '/template/sidebar');
@@ -679,13 +685,13 @@ class Review extends CI_Controller {
 		$image_path = './uploads/images/' . $data['review']->image_name . '.' . $data['review']->image_extension;
 		debug('delete review image and thumb nail images');
 		if (file_exists($review_thumb_path)) {
-		    unlink($review_thumb_path);
+		    @unlink($review_thumb_path);
 		}
 		if (file_exists($search_thumb_path)) {
-		    unlink($search_thumb_path);
+		    @unlink($search_thumb_path);
 		}
 		if (file_exists($image_path)) {
-		    unlink($image_path);
+		    @unlink($image_path);
 		}
 	    }
 	}
@@ -803,13 +809,13 @@ class Review extends CI_Controller {
 		$image_path = './uploads/images/' . $data['review']->image_name . '.' . $data['review']->image_extension;
 		debug('delete review image and thumb nail images');
 		if (file_exists($review_thumb_path)) {
-		    unlink($review_thumb_path);
+		    @unlink($review_thumb_path);
 		}
 		if (file_exists($search_thumb_path)) {
-		    unlink($search_thumb_path);
+		    @unlink($search_thumb_path);
 		}
 		if (file_exists($image_path)) {
-		    unlink($image_path);
+		    @unlink($image_path);
 		}
 	    }
 	}

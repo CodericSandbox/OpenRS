@@ -149,8 +149,10 @@ class Ad extends CI_Controller {
 		    $config['max_height'] = $this->setting['max_upload_height'];
 		    $config['remove_spaces'] = TRUE;
 		    // store the file name and extension
-		    $file_name = str_replace(' ', '_', pathinfo($_FILES['userfile']['name'], PATHINFO_FILENAME));
-		    $extension = $ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
+		    $extension = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
+		    $file_name = str_replace(' ', '_', $_FILES['userfile']['name']);
+		    $file_name = substr($file_name,0,strlen($file_name)-strlen($extension)-1);
+		    $file_name = str_replace('.', '_', $_FILES['userfile']['name']);
 		    // create a random number to append to the file name
 		    $random_number = rand(0, 99999999);
 		    $config['file_name'] = $file_name . '_' . $random_number . '.' . $extension;
@@ -186,12 +188,12 @@ class Ad extends CI_Controller {
 		    if (!$this->image_lib->resize()) {
 			// delete the file if resize fails
 			debug('resize failed - deleting original file - upload failed');
-			unlink('./uploads/ads/images/' . $orig_file_name);
+			@unlink('./uploads/ads/images/' . $orig_file_name);
 			$data['upload_error'] = $this->image_lib->display_errors() . 'snerf' . lang('manager_review_form_remote_image_fail');
 			$file_error = 1;
 		    } else {
 			// delete the temporary resized image file
-			unlink('./uploads/ads/images/' . $random_number_resize . '.' . $extension);
+			@unlink('./uploads/ads/images/' . $random_number_resize . '.' . $extension);
 			// resize image if a width and height were provided
 			if (($width > 0) && ($height > 0)) {
 			    debug('attempting to resize image');
@@ -208,7 +210,7 @@ class Ad extends CI_Controller {
 			    if (!$this->image_lib->resize()) {
 				// delete the file if resize fails
 				debug('resize failed - deleting original file - upload failed');
-				unlink('./uploads/ads/images/' . $orig_file_name);
+				@unlink('./uploads/ads/images/' . $orig_file_name);
 				$data['upload_error'] = lang('manager_review_form_remote_image_fail');
 				$file_error = 1;
 			    }
@@ -333,8 +335,10 @@ class Ad extends CI_Controller {
 		    $config['max_height'] = $this->setting['max_upload_height'];
 		    $config['remove_spaces'] = TRUE;
 		    // store the file name and extension
-		    $file_name = str_replace(' ', '_', pathinfo($_FILES['userfile']['name'], PATHINFO_FILENAME));
-		    $extension = $ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
+		    $extension = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
+		    $file_name = str_replace(' ', '_', $_FILES['userfile']['name']);
+		    $file_name = substr($file_name,0,strlen($file_name)-strlen($extension)-1);
+		    $file_name = str_replace('.', '_', $_FILES['userfile']['name']);
 		    // create a random number to append to the file name
 		    $random_number = rand(0, 99999999);
 		    $config['file_name'] = $file_name . '_' . $random_number . '.' . $extension;
@@ -370,12 +374,12 @@ class Ad extends CI_Controller {
 		    if (!$this->image_lib->resize()) {
 			// delete the file if resize fails
 			debug('resize failed - deleting original file - upload failed');
-			unlink('./uploads/ads/images/' . $orig_file_name);
+			@unlink('./uploads/ads/images/' . $orig_file_name);
 			$data['upload_error'] = $this->image_lib->display_errors() . lang('manager_review_form_remote_image_fail');
 			$file_error = 1;
 		    } else {
 			// delete the temporary resized image file
-			unlink('./uploads/ads/images/' . $random_number_resize . '.' . $extension);
+			@unlink('./uploads/ads/images/' . $random_number_resize . '.' . $extension);
 			// resize image if a width and height were provided
 			if (($width > 0) && ($height > 0)) {
 			    debug('attempting to resize image');
@@ -392,7 +396,7 @@ class Ad extends CI_Controller {
 			    if (!$this->image_lib->resize()) {
 				// delete the file if resize fails
 				debug('resize failed - deleting original file - upload failed');
-				unlink('./uploads/ads/images/' . $orig_file_name);
+				@unlink('./uploads/ads/images/' . $orig_file_name);
 				$data['upload_error'] = lang('manager_review_form_remote_image_fail');
 				$file_error = 1;
 			    }
@@ -414,7 +418,7 @@ class Ad extends CI_Controller {
 		    }
 		    // delete any previous uploaded image
 		    if (($data['ad']->local_image_name != $orig_file_name)&&($data['ad']->local_image_name!=='')) {
-			unlink('./uploads/ads/images/' . $data['ad']->local_image_name);
+			@unlink('./uploads/ads/images/' . $data['ad']->local_image_name);
 		    }
 		    $name = $this->input->post('name');
 		    $text = $this->input->post('text');
@@ -501,7 +505,7 @@ class Ad extends CI_Controller {
 		$ad_image_path = './uploads/ads/images/' . $data['ad']->local_image_name;
 		debug('delete ad image');
 		if (file_exists($ad_image_path)) {
-		    unlink($ad_image_path);
+		    @unlink($ad_image_path);
 		}
 	    }
 	}
