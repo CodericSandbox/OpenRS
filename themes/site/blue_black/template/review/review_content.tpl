@@ -113,7 +113,7 @@
 	    </div>
 	    <div class="review_click_image">{{= lang('review_larger_image') }}</div>
 	    {{ else: }}
-	    {{= anchor('recommends/this/' . $review->seo_title, ' ', 'rel="nofollow" class="image" style="background: url('.$review->review_thumb_url.') no-repeat center center"') }}
+	    {{= anchor('recommends/this/' . $review->seo_title, ' ', 'rel="nofollow" target="_blank" class="image" style="background: url('.$review->review_thumb_url.') no-repeat center center"') }}
 	    </div>
 	    {{ endif }}
 	    {{ if ($features_count > 0): }}
@@ -150,7 +150,7 @@
 
 	<!-- START OF 'BUTTON' SECTION -->
 	<div class="review_button_row">
-	    {{= anchor('recommends/this/' . $review->seo_title, lang('review_button'), 'rel="nofollow" class="review_button"') }}
+	    {{= anchor('recommends/this/' . $review->seo_title, lang('review_button'), 'rel="nofollow" target="_blank" class="review_button"') }}
 	</div>
 	<!-- END OF 'BUTTON' SECTION -->
 	
