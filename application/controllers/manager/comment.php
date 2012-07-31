@@ -110,6 +110,7 @@ class Comment extends CI_Controller {
 			// add the comment
 			debug('add the comment');
 			$addComment = $this->Comment_model->addComment($review_id, $quotation, $source, '', $approved, 0);
+                        $this->Review_model->updateAverageVisitorRating($review->id);
 			$data['review'] = $review;
 			$data['message'] = lang('manager_comment_add_success');
 			// clear form validation data

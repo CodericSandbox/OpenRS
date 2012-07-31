@@ -49,6 +49,59 @@ class Review_model extends CI_Model {
 	parent::__construct();
 	$this->load->database();
     }
+    
+    /*
+     * updateAverageVisitorRating
+     */
+    
+    function updateAverageVisitorRating($review_id) {
+	// calculates the average rating given by visitors for a review
+	$this->db->select('visitor_rating');
+	$this->db->where('review_id', $review_id);
+	$this->db->where('approved', '1');
+	$this->db->where('visitor_rating >', '0');
+	$query = $this->db->get('comment');
+	// count how many approved comments there are for this review
+	$result_count = $query->num_rows();
+	if ($result_count > 0) {
+	    $total_rating = 0;
+	    // total all the rating values
+	    foreach ($query->result() as $rating) {
+		$total_rating += $rating->visitor_rating;
+	    }
+	    // calculate average
+	    $real_average_rating = $total_rating / $result_count;
+	    $average_rating = round($real_average_rating);
+	    // get the rating image for the rating value
+	    switch ($average_rating) {
+		case 1:
+		    $rating_image = "rating_1.jpg";
+		    break;
+		case 2:
+		    $rating_image = "rating_2.jpg";
+		    break;
+		case 3:
+		    $rating_image = "rating_3.jpg";
+		    break;
+		case 4:
+		    $rating_image = "rating_4.jpg";
+		    break;
+		case 5:
+		    $rating_image = "rating_5.jpg";
+		    break;
+	    }
+	} else {
+	    // no ratings
+	    $rating_image = 'not_rated.jpg';
+	}
+	$data = array(
+	    'average_rating' => $real_average_rating,
+	    'rating_image' => $rating_image
+	);
+	$this->db->where('id', $review_id);
+	// update the review
+	$this->db->update('review', $data);
+    }
 
     /*
      * addReview function
@@ -317,7 +370,7 @@ class Review_model extends CI_Model {
 	    $this->db->limit($limit, $offset);
 	}
 	// newest first
-	$this->db->order_by('id', 'desc');
+	$this->db->order_by('average_rating', 'desc');
 	if ($approval_required > 0)
 	    $this->db->where('approved', '1');
 	$query = $this->db->get('review');

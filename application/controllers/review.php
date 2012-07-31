@@ -247,6 +247,7 @@ class Review extends CI_Controller {
                                     // captcha code was entered successfully
                                     // add the comment
                                     $addComment = $this->Comment_model->addComment($id, $quotation, $source, '', $approval_status, $rating);
+                                    $this->Review_model->updateAverageVisitorRating($review->id);
                                     if ($approval_status == 0) {
                                         // if not approved tell user their comment will appear when manager has approved it
                                         debug('comment not approved yet - display message');
@@ -268,6 +269,7 @@ class Review extends CI_Controller {
                                 // captcha not required so just add the comment
                                 debug('captcha not required');
                                 $addComment = $this->Comment_model->addComment($id, $quotation, $source, '', $approval_status, $rating);
+                                $this->Review_model->updateAverageVisitorRating($review->id);
                                 if ($approval_status == 0) {
                                     // if not approved tell user their comment will appear when manager has approved it
                                     debug('comment not approved yet - display message');
