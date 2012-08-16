@@ -82,7 +82,7 @@
 	    <div class="thumb">
 		{{= anchor('review/show/' . $result->seo_title, ' ','class="image" style="background: url('.$result->list_thumb_url.') no-repeat center center"') }}
 	    </div>
-	    {{= highlight_keywords(character_limiter($result->description, 300), $keywords) }}
+	    {{= highlight_keywords(character_limiter(strip_tags($result->description), 300), $keywords) }}
 	    <div class="more_button_link">
 		{{= anchor('review/show/' . $result->seo_title, lang('lists_read_more'),'class="more_button"') }}
 	    </div>
