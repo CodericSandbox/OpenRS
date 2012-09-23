@@ -283,6 +283,7 @@ class Comment_model extends CI_Model {
 	    $this->db->limit($limit, $offset);
 	}
 	$this->db->where('review_id', $id);
+	$this->db->where('approved', '1');
 	$this->db->order_by('id', 'DESC');
 	$query = $this->db->get('comment');
 	if ($query->num_rows() > 0) {
