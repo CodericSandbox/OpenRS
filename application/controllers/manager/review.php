@@ -76,6 +76,7 @@ class Review extends CI_Controller {
 	debug('manager/review page | add function');
 	// check user is logged in with manager level permissions
 	$this->secure->allowManagers($this->session);
+        $user_id = $this->session->userdata('id');
 	// create '$review' variable for use in the view
 	$data['categories'] = $this->Category_model->getCategoriesDropDown();
 	$data['selected_category'] = 0;
@@ -265,7 +266,6 @@ class Review extends CI_Controller {
 			    // resize failed... delete the file and set error message
 			    debug('resize failed - deleting original file - upload failed');
 			    @unlink('./uploads/images/' . $uploaded_file_name . '.' . $uploaded_file_extension);
-                            echo $this->image_lib->display_errors();
 			    $data['grab_error'] = lang('manager_review_form_remote_image_fail');
 			    $file_error = 1;
 			}
@@ -289,7 +289,7 @@ class Review extends CI_Controller {
 		    $approved = ($review_approval == 0) OR ($auto_approve == 1) ? 1 : 0;
 		    // add the review
 		    debug('add the review');
-		    $new_review_id = $this->Review_model->addReview($title, $description, $category_id, $featured, $tags, $uploaded_file_name, $uploaded_file_extension, $vendor, $link, $meta_keywords, $meta_description, $approved);
+		    $new_review_id = $this->Review_model->addReview($title, $description, $category_id, $featured, $tags, $uploaded_file_name, $uploaded_file_extension, $vendor, $link, $meta_keywords, $meta_description, $approved,$user_id);
 		    // get some data and reload the form
 		    $default_ratings = $this->Category_default_rating_model->getDefaultRatingsByCategoryId($category_id);
 		    if ($default_ratings) {
@@ -490,7 +490,6 @@ class Review extends CI_Controller {
 			// resize failed... delete the file and set error message
 			debug('resize failed - deleting original file - upload failed');
 			@unlink('./uploads/images/' . $uploaded_file_name . '.' . $uploaded_file_extension);
-                        echo $this->image_lib->display_errors();
 			$data['grab_error'] = lang('manager_review_form_remote_image_fail');
 			$file_error = 1;
 		    } else {

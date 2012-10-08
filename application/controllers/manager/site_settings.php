@@ -83,7 +83,7 @@ class Site_settings extends CI_Controller {
 	$data['featured_section_search'] = $this->setting['featured_section_search'] > 0 ? 'CHECKED' : '';
 	$data['featured_count'] = $this->setting['featured_count'];
 	$data['featured_minimum'] = $this->setting['featured_minimum'];
-	$data['search_sidebar'] = $this->setting['search_sidebar'];
+	$data['search_sidebar'] = $this->setting['search_sidebar'] > 0 ? 'CHECKED' : '';
 	$data['recent_review_sidebar'] = $this->setting['recent_review_sidebar'] > 0 ? 'CHECKED' : '';
 	$data['number_of_reviews_sidebar'] = $this->setting['number_of_reviews_sidebar'];
 	$data['tag_cloud_sidebar'] = $this->setting['tag_cloud_sidebar'] > 0 ? 'CHECKED' : '';
